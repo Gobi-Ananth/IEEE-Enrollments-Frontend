@@ -26,9 +26,11 @@ export default function App() {
 
   if (checkingUserAuth)
     return (
-      <Wrapper>
-        <LoadingScreen />
-      </Wrapper>
+      <Router>
+        <Wrapper>
+          <LoadingScreen />
+        </Wrapper>
+      </Router>
     );
 
   return (

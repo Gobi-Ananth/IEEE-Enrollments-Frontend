@@ -15,7 +15,7 @@
   text-align: center;
   justify-content: center;
   background-color: var(--primary-bg);
-  min-height: 88vh;
+  min-height: 82vh;
   width: 85vw;
   position: relative;
   padding: 20px;
@@ -94,7 +94,7 @@ h2 {
   top: 0;
   right: 0;
   transform: translate(40%, -50%);
-  width: 10rem;
+  width: 9.5rem;
   height: auto;
 }
 
@@ -131,6 +131,10 @@ footer {
 }
 
 @media (max-width: 720px) {
+  .signup-container {
+    box-shadow: 10px 10px 0px var(--shadow);
+  }
+
   header div {
     width: 75vw;
   }
@@ -157,7 +161,7 @@ footer {
   }
 
   .standing-guy {
-    width: 8rem;
+    width: 9rem;
   }
 
   .signup-box p {
@@ -166,7 +170,7 @@ footer {
   }
 
   .google-signin {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     width: 14rem;
   }
 
@@ -176,5 +180,11 @@ footer {
 
   .social-links img {
     width: 1.2rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .signup-container {
+    justify-content: start;
   }
 }

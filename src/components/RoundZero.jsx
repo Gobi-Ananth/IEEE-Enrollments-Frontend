@@ -160,7 +160,10 @@ export default function RoundZero() {
           setErrors(newErrors);
           return;
         }
-      } else if (!answers[question.id]) {
+      } else if (
+        !answers[question.id] ||
+        answers[question.id].trim().length === 0
+      ) {
         newErrors[question.id] = "Mandatory Question";
         setErrors(newErrors);
         return;
@@ -181,7 +184,7 @@ export default function RoundZero() {
     if (question.id === "githubProfile" && answers["githubProfile"]) {
       const phoneRegex = /^https:\/\/github\.com\/[a-zA-Z0-9-]+\/?$/;
       if (!phoneRegex.test(answers["githubProfile"])) {
-        newErrors["githubProfile"] = "Invalid phone number.";
+        newErrors["githubProfile"] = "Invalid github Profile.";
         setErrors(newErrors);
         return;
       }
@@ -310,7 +313,7 @@ export default function RoundZero() {
                   maxLength={500}
                 ></textarea>
                 {errors[questions[currentQuestion].id] && (
-                  <p className="error-tex">
+                  <p className="error-text">
                     {errors[questions[currentQuestion].id]}
                   </p>
                 )}

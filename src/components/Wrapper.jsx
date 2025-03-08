@@ -11,8 +11,24 @@ import Lock from "../assets/lock.svg";
 import Hamburger from "../assets/Hamburger.svg";
 import Plus from "../assets/Plus.svg";
 import Tab from "../assets/Tab.svg";
+import { useLocation, useNavigate } from "react-router-dom";
+import useUserStore from "../stores/useUserStore.js";
 
 export default function Wrapper({ title, children }) {
+  const { logout, checkUserAuth } = useUserStore();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleClose = async () => {
+    if (location.pathname === "/") {
+      await logout();
+      await checkUserAuth();
+    } else {
+      navigate("/");
+      await checkUserAuth();
+    }
+  };
+
   return (
     <main className="wrapper">
       <section className="upper-nav">
@@ -23,7 +39,7 @@ export default function Wrapper({ title, children }) {
         <div className="window-controls">
           <SvgButton svgLabel={Minimize} />
           <SvgButton svgLabel={Maximize} />
-          <SvgButton svgLabel={Close} />
+          <SvgButton svgLabel={Close} onClick={handleClose} />
         </div>
       </section>
       <section className="lower-nav">
