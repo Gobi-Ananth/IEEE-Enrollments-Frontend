@@ -1,0 +1,36 @@
+.rounds {
+  width: 80%;
+  display: flex;
+  gap: 4rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 20px 0;
+}
+
+.round {
+  text-align: center;
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+  align-items: center;
+}
+
+.round p {
+  font-size: 2rem;
+}
+
+.round img {
+  width: 11rem;
+}
+
+@media (max-width: 720px) {
+  .rounds {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .round img {
+    width: 7rem;
+  }
+}

@@ -1,0 +1,166 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: #fceee3;
+  min-height: 88vh;
+  width: 80vw;
+  font-family: "Cooper Hewitt", sans-serif;
+  font-weight: bold;
+  position: relative;
+  border: solid black 3px;
+  box-shadow: 16px 16px 0px black;
+  margin: 5rem 0 3rem;
+}
+
+.btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.upper-nav {
+  width: 100%;
+  height: 4rem;
+  background-color: #00171f;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 10px 10px 0 10px;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.window-controls {
+  display: flex;
+  align-items: center;
+}
+
+.lower-nav {
+  width: 100%;
+  background-color: #f1991b;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.nav-controls {
+  display: flex;
+  gap: 10px;
+  flex: 0 0 auto;
+}
+
+.nav-ham {
+  margin-top: 2px;
+  flex: 0 0 auto;
+  min-width: 30px;
+}
+
+.nav-controls button object {
+  width: 100%;
+}
+
+.ham {
+  margin-top: 4px;
+}
+
+.address-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex: 1;
+  margin: 0 10px;
+  max-width: calc(100% - 250px);
+  height: 3.6rem;
+  background-color: #f2f2f2;
+  border: solid black 5px;
+  gap: 10px;
+  padding: 0 10px;
+  font-size: 1.5rem;
+}
+
+.address-bar img {
+  flex-shrink: 0;
+}
+
+.address-bar h3.text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+  text-align: left;
+  width: 100%;
+}
+
+.container {
+  width: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 720px) {
+  .wrapper {
+    box-shadow: 10px 10px 0px black;
+  }
+
+  .window-controls img {
+    width: 1.4rem;
+  }
+
+  .upper-nav {
+    height: 2.4rem;
+  }
+
+  .upper-nav img {
+    height: 1.4rem;
+  }
+
+  .tab {
+    margin-top: 4px;
+  }
+
+  .nav-controls {
+    gap: 2px;
+  }
+
+  .nav-controls img {
+    height: 100%;
+    width: 1.6rem;
+  }
+
+  .lower-nav {
+    height: 3.2rem;
+  }
+
+  .nav-ham {
+    min-width: 20px;
+  }
+
+  .nav-ham img {
+    width: 1.6rem;
+  }
+
+  .address-bar {
+    height: 100%;
+    font-size: 0.7rem;
+    gap: 2px;
+    padding: 0 5px;
+    border-width: 3px;
+    margin: 0 5px;
+    max-width: calc(100% - 86px);
+  }
+
+  .address-bar img {
+    width: 0.8rem;
+  }
+}
