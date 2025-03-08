@@ -7,9 +7,10 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "https://ieee-enrollments-backend.vercel.app",
+        target: "http://localhost:5000",
         changeOrigin: true,
-        secure: true,
+        secure: false,
+        ws: true,
       },
     },
   },
