@@ -182,8 +182,8 @@ export default function RoundZero() {
     }
 
     if (question.id === "githubProfile" && answers["githubProfile"]) {
-      const phoneRegex = /^https:\/\/github\.com\/[a-zA-Z0-9-]+\/?$/;
-      if (!phoneRegex.test(answers["githubProfile"])) {
+      const githubRegex = /^(https:\/\/github\.com\/)?[a-zA-Z0-9-]+\/?$/;
+      if (!githubRegex.test(answers["githubProfile"])) {
         newErrors["githubProfile"] = "Invalid github Profile.";
         setErrors(newErrors);
         return;
