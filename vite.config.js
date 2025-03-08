@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "https://enrollment-portal-2025-backend.onrender.com",
+        target: "https://ieee-enrollments-backend.vercel.app",
         changeOrigin: true,
         secure: true,
       },
