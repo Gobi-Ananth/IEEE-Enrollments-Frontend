@@ -50,7 +50,7 @@ export default function Wrapper({ title, children }) {
     if (isPopupDisabled) {
       return "/profile.png";
     } else {
-      if (!user.picture) {
+      if (!user || !user.picture) {
         return "/profile.png";
       } else {
         return user.picture;
