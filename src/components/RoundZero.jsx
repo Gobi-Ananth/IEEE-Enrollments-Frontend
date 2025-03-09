@@ -234,13 +234,20 @@ export default function RoundZero() {
     setDisabled(true);
     try {
       answers["managementQuestion"] = managementQuestion;
-      const response = await axiosInstance.post("/user/r0-submission", answers);
-      toast.success(response.data.message);
-      sessionStorage.clear();
-      checkUserAuth();
-      setDisabled(false);
-      navigate("/");
+      await checkUserAuth();
+      if (user) {
+        const response = await axiosInstance.post(
+          "/user/r0-submission",
+          answers
+        );
+        toast.success(response.data.message);
+        sessionStorage.clear();
+        checkUserAuth();
+        setDisabled(false);
+        navigate("/");
+      }
     } catch (err) {
+      if (err.response.status === 401) return;
       if (err.response) {
         toast.error(err.response.data?.message || "An error occurred");
       } else if (err.request) {
