@@ -58,27 +58,47 @@ export default function SignUpPage() {
       <footer>
         <ul className="social-links">
           <li>
-            <a href="https://www.instagram.com/ieeevitvellore/">
+            <a
+              href="https://www.instagram.com/ieeevitvellore/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <img src={InstagramLogo} alt="Instagram Logo" />
             </a>
           </li>
           <li>
-            <a href="https://x.com/ieeevitvellore">
+            <a
+              href="https://x.com/ieeevitvellore"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <img src={TwitterLogo} alt="Twitter Lgoo" />
             </a>
           </li>
           <li>
-            <a href="https://github.com/ieee-vit">
+            <a
+              href="https://github.com/ieee-vit"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <img src={GithubLogo} alt="Github Logo" />
             </a>
           </li>
           <li>
-            <a href="#">
+            <a
+              href="https://discord.com/invite/KbpGNvUd"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <img src={DiscordLogo} alt="Discord Logo" />
             </a>
           </li>
           <li>
-            <a href="https://www.linkedin.com/company/ieee-vit-vellore/">
+            <a
+              href="https://www.linkedin.com/company/ieee-vit-vellore/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <img src={LinkedinLogo} alt="Linkedin Logo" />
             </a>
           </li>

@@ -9,7 +9,7 @@ export default defineConfig({
       "/api": {
         target: "https://ieee-enrollments-backend.vercel.app",
         changeOrigin: true,
-        secure: false,
+        secure: true,
         ws: true,
       },
     },

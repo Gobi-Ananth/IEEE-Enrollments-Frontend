@@ -62,6 +62,7 @@ const baseQuestions = [
       "BLOCK CHAIN",
       "COMPETITIVE CODING",
       "GAME DEV",
+      "MANAGEMENT",
     ],
     min: 1,
     max: 2,
@@ -115,15 +116,15 @@ export default function RoundZero() {
   const [errors, setErrors] = useState({});
   const [questions, setQuestions] = useState(baseQuestions);
   const [randomQuestionSet, setRandomQuestionSet] = useState(false);
+  const [disabled, setDisabled] = useState(false);
   const { user, checkUserAuth } = useUserStore();
   const location = useLocation();
   const navigate = useNavigate();
-
   useEffect(() => {
     sessionStorage.setItem("formAnswers", JSON.stringify(answers));
   }, [answers]);
 
-  if (!location.state?.allowed || user.Round0Status === "completed") {
+  if (!location.state?.allowed || user.round0Status === "completed") {
     return <Navigate to="/" />;
   }
 
@@ -230,11 +231,14 @@ export default function RoundZero() {
   };
 
   const handleSubmit = async () => {
+    setDisabled(true);
     try {
       answers["managementQuestion"] = managementQuestion;
       const response = await axiosInstance.post("/user/r0-submission", answers);
       toast.success(response.data.message);
+      sessionStorage.clear();
       checkUserAuth();
+      setDisabled(false);
       navigate("/");
     } catch (err) {
       if (err.response) {
@@ -244,8 +248,8 @@ export default function RoundZero() {
       } else {
         toast.error("Round 0 submission failed");
       }
+      setDisabled(false);
     }
-    sessionStorage.clear();
   };
 
   return (
@@ -256,7 +260,11 @@ export default function RoundZero() {
         </button>
       ) : formCompleted ? (
         <>
-          <button className="s-button" onClick={handleSubmit}>
+          <button
+            className="s-button"
+            disabled={disabled}
+            onClick={handleSubmit}
+          >
             Submit
           </button>
           <button className="review" onClick={() => setFormCompleted(false)}>

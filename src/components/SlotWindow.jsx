@@ -40,7 +40,7 @@ export default function SlotWindow() {
     }
   }, [currentTime, slot.time, status]);
 
-  if (!location.state?.allowed) {
+  if (!location.state?.allowed || !user.slot) {
     return <Navigate to="/" />;
   }
 

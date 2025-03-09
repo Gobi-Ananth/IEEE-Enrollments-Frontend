@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const TextColor = [
   { label: "Completed", Color: "#2AC080" },
-  { label: "Upcoming", Color: "#FDE82D" },
+  { label: "Upcoming", Color: "#FD5F1C" },
   { label: "Missed", Color: "#F03F3F" },
 ];
 

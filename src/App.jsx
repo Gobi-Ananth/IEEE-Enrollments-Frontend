@@ -16,6 +16,7 @@ import Interview from "./components/Interview.jsx";
 import SlotWindow from "./components/SlotWindow.jsx";
 import FallBack from "./components/FallBack.jsx";
 import LoadingScreen from "./components/LoadingScreen.jsx";
+import NotFoundScreen from "./components/NotFoundScreen.jsx";
 
 export default function App() {
   const { user, checkUserAuth, checkingUserAuth } = useUserStore();
@@ -50,7 +51,7 @@ export default function App() {
                   <Rounds />
                 </Wrapper>
               ) : (
-                <SignUpPage />
+                <Navigate to="/login" />
               )
             }
           />
@@ -62,7 +63,7 @@ export default function App() {
                   <RoundZero />
                 </Wrapper>
               ) : (
-                <SignUpPage />
+                <Navigate to="/login" />
               )
             }
           />
@@ -74,7 +75,7 @@ export default function App() {
                   <Interview />
                 </Wrapper>
               ) : (
-                <SignUpPage />
+                <Navigate to="/login" />
               )
             }
           />
@@ -86,7 +87,7 @@ export default function App() {
                   <SlotWindow />
                 </Wrapper>
               ) : (
-                <SignUpPage />
+                <Navigate to="/login" />
               )
             }
           />
@@ -98,8 +99,16 @@ export default function App() {
                   <FallBack />
                 </Wrapper>
               ) : (
-                <SignUpPage />
+                <Navigate to="/login" />
               )
+            }
+          />
+          <Route
+            path="*"
+            element={
+              <Wrapper>
+                <NotFoundScreen />
+              </Wrapper>
             }
           />
         </Routes>
