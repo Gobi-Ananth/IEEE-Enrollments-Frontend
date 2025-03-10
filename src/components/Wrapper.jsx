@@ -22,6 +22,8 @@ export default function Wrapper({ title, children }) {
   const [showPopup, setShowPopup] = useState(false);
   const popupRef = useRef(null);
   const buttonRef = useRef(null);
+  const liveRound = Number(import.meta.env.VITE_LIVE_ROUND);
+  const pausedRound = Number(import.meta.env.VITE_PAUSED_ROUND) || null;
 
   const isLoadingScreen =
     children && children.type && children.type.name === "LoadingScreen";
@@ -130,7 +132,9 @@ export default function Wrapper({ title, children }) {
                   <div className="profile-name">{user.name}</div>
                   <p className="profile-email">{user.email}</p>
                   <div className="profile-Info">
-                    <span>Current Round: {user.currentRound}</span>
+                    <span>
+                      Current Round: {pausedRound ? pausedRound - 1 : liveRound}
+                    </span>
                   </div>
                 </div>
               </div>

@@ -40,6 +40,7 @@ export default function Rounds() {
 
   const checkCurrentRound = (index) => index === currentRound;
   const liveRound = Number(import.meta.env.VITE_LIVE_ROUND);
+  const pausedRound = Number(import.meta.env.VITE_PAUSED_ROUND) || null;
 
   const handleRoundClick = (index) => {
     const roundStatuses = [
@@ -48,6 +49,13 @@ export default function Rounds() {
       user.round2Status,
       user.round3Status,
     ];
+
+    if (pausedRound && index === pausedRound) {
+      navigate("/fallback", {
+        state: { allowed: true, fallbackText: "Upcoming" },
+      });
+      return;
+    }
 
     if (roundStatuses[index] === "completed") {
       navigate(index === 0 || index === 3 ? "/fallback" : "/task", {
