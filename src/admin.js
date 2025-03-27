@@ -30,4 +30,8 @@ export const adminEmails = [
   "sorathiyaved.chetan2022@vitstudent.ac.in",
   "gopal.yadav2022@vitstudent.ac.in",
   "subham.agarwal2022@vitstudent.ac.in",
+  "aditya.tomar2023@vitstudent.ac.in",
+  "anannya.paliwal2023@vitstudent.ac.in",
+  "yuval.gupta2023@vitstudent.ac.in",
+  "Shivani.gupta2023@vitstudent.ac.in",
 ];

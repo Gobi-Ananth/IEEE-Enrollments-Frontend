@@ -87,7 +87,7 @@ export default function SlotWindow() {
           </div>
         </div>
         {status === "ready" && !user.slot.isReady && (
-          <button className="ready-btn" onClick={handleReadyClick}>
+          <button className="ready-btn btn" onClick={handleReadyClick}>
             I&apos;M READY!
           </button>
         )}

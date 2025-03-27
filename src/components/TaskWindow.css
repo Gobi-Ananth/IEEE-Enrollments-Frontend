@@ -1,0 +1,92 @@
+.task-container {
+  min-height: 30rem;
+  height: auto;
+  width: 26rem;
+  background-color: #f1991b;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.3rem;
+  border: solid black 4px;
+  box-sizing: border-box;
+}
+
+.question-box2 {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.question-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  width: 100%;
+}
+
+.question-description {
+  font-size: 1rem;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.question-title,
+.question-description {
+  word-wrap: break-word; /* Ensures long words wrap */
+  overflow-wrap: break-word; /* Ensures content doesn't overflow */
+  white-space: normal; /* Prevents continuous single-line text */
+  max-width: 100%; /* Keeps content within container */
+  box-sizing: border-box; /* Includes padding and border in width */
+  overflow: hidden; /* Hides overflow content */
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1rem;
+}
+
+.repo-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid black;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.submit-button-container {
+  width: 100%;
+}
+
+.submit-button2 {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button2:hover {
+  background-color: #333;
+}
+
+@media (max-width: 720px) {
+  .task-container {
+    width: 17rem;
+    min-height: 24rem;
+    height: auto;
+    padding: 0.8rem;
+    border-width: 3px;
+  }
+}

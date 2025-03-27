@@ -82,6 +82,17 @@
   height: 20px;
 }
 
+.ready-btn {
+  background-color: #fceee3;
+  padding: 10px 15px;
+  border: 2px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  font-weight: bold;
+  margin-top: 15px;
+}
+
 @media (max-width: 1080px) {
   .window {
     width: 12rem;
@@ -101,5 +112,11 @@
 
   .slot-window {
     left: 30%;
+  }
+
+  .ready-btn {
+    padding: 5px 5px;
+    margin-top: 4px;
+    font-size: 0.8rem;
   }
 }

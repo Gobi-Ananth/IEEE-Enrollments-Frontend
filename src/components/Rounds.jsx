@@ -27,7 +27,7 @@ export default function Rounds() {
   }, [user.currentRound]);
 
   const getFolderIcon = (index) => {
-    if (user.isEliminated && index >= currentRound && index !== 0) {
+    if (user.isEliminated && currentRound <= index && index !== 0) {
       return `/assets/Rounds/round${index}-locked.svg`;
     }
     if (currentRound === 3 && user.round3Status === "complete") {
@@ -53,21 +53,25 @@ export default function Rounds() {
       user.round3Status,
     ];
 
-    if (
-      pausedRound &&
-      index === pausedRound &&
-      index !== 2 &&
-      !user.isEliminated
-    ) {
+    if (roundStatuses[index] === "completed") {
       navigate("/fallback", {
-        state: { allowed: true, fallbackText: "Upcoming" },
+        state: { allowed: true, fallbackText: "Completed" },
       });
       return;
     }
 
-    if (roundStatuses[index] === "completed") {
-      navigate(index === 2 ? "/task" : "/fallback", {
-        state: { allowed: true, fallbackText: "Completed" },
+    if (user.isEliminated && currentRound <= index) {
+      if (index === 0) {
+        navigate("/fallback", {
+          state: { allowed: true, fallbackText: "Missed" },
+        });
+      }
+      return;
+    }
+
+    if (pausedRound && index === pausedRound && pausedRound <= currentRound) {
+      navigate("/fallback", {
+        state: { allowed: true, fallbackText: "Upcoming" },
       });
       return;
     }
@@ -86,7 +90,7 @@ export default function Rounds() {
       return;
     }
 
-    if (checkCurrentRound(index) && !user.isEliminated) {
+    if (checkCurrentRound(index)) {
       if (!user.slot && index !== 0) {
         navigate("/slots", { state: { allowed: true } });
         return;

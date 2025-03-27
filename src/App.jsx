@@ -20,6 +20,7 @@ import NotFoundScreen from "./components/NotFoundScreen.jsx";
 import AdminLogin from "./components/Admin-Components/AdminLogin.jsx";
 import useAdminStore from "./stores/useAdminStore.js";
 import InterviewAdmin from "./components/Admin-Components/InterviewAdmin.jsx";
+import TaskWindow from "./components/TaskWindow.jsx";
 
 export default function App() {
   const { user, checkUserAuth, checkingUserAuth } = useUserStore();
@@ -94,6 +95,18 @@ export default function App() {
               user ? (
                 <Wrapper title="https://enrollments.ieeevit.org/meet">
                   <SlotWindow />
+                </Wrapper>
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+          <Route
+            path="/task"
+            element={
+              user ? (
+                <Wrapper title="https://enrollments.ieeevit.org/task">
+                  <TaskWindow />
                 </Wrapper>
               ) : (
                 <Navigate to="/login" />
