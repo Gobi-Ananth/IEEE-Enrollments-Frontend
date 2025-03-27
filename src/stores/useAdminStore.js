@@ -2,11 +2,13 @@ import { create } from "zustand";
 import axiosInstance from "../lib/axios.js";
 import { toast } from "react-hot-toast";
 import { auth, provider, signInWithPopup } from "../config/firebase.js";
+import { v4 as uuidv4 } from "uuid";
+import { adminEmails } from "../admin.js";
 
 const useAdminStore = create((set) => ({
   admin: null,
   loading: false,
-  checkingAdminAuth: true,
+  checkingAdminAuth: false,
 
   login: async () => {
     set({ loading: true });
@@ -19,10 +21,21 @@ const useAdminStore = create((set) => ({
         set({ loading: false });
         return;
       }
+      if (!adminEmails.includes(admin.email)) {
+        await auth.signOut();
+        toast.error("Unauthorized");
+        set({ loading: false });
+        return;
+      }
       const token = await admin.getIdToken();
+      let deviceId = localStorage.getItem("deviceId");
+      if (!deviceId) {
+        deviceId = uuidv4();
+        localStorage.setItem("deviceId", deviceId);
+      }
       const response = await axiosInstance.post(
         "/admin",
-        {},
+        { deviceId },
         { headers: { Authorization: `Bearer ${token}` } }
       );
       if (response.status === 200 || response.status === 201) {

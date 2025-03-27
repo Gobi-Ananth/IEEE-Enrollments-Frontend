@@ -1,0 +1,243 @@
+:root {
+  --background: #0a0a0a;
+  --text: #e0e0e0;
+  --accent: #ff0000;
+  --accent-glow: rgba(255, 0, 0, 0.5);
+  --secondary: #1a1a1a;
+  --border: #333333;
+}
+
+@font-face {
+  font-family: "Horror";
+  src: url("https://fonts.googleapis.com/css2?family=Creepster&display=swap");
+}
+
+/* * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text);
+
+  overflow: hidden;
+} */
+
+.admin_container {
+  font-family: "Courier New", monospace;
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  position: relative;
+}
+
+.admin_content_area {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+  background-color: var(--background);
+  position: relative;
+}
+
+.admin_content_area::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 0, 0, 0.05) 0%,
+    rgba(0, 0, 0, 0) 70%
+  );
+  pointer-events: none;
+}
+
+.admin_container h1,
+.admin_container h2,
+.admin_container h3 {
+  font-family: "Horror", "Creepster", cursive;
+  letter-spacing: 1px;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 0 8px var(--accent-glow);
+}
+
+.admin_container h1 {
+  font-size: 2.5rem;
+  color: var(--accent);
+}
+
+.admin_container h2 {
+  font-size: 2rem;
+  color: var(--accent);
+}
+
+.admin_reviewForm_name {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--accent);
+}
+
+.admin_card {
+  background-color: var(--secondary);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.admin_card:hover {
+  box-shadow: 0 0 15px var(--accent-glow);
+}
+
+.admin_btn {
+  background-color: transparent;
+  color: var(--text);
+  border: 1px solid var(--accent);
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: "Courier New", monospace;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+}
+
+.admin_btn:hover {
+  background-color: var(--accent);
+  color: var(--background);
+  box-shadow: 0 0 15px var(--accent-glow);
+}
+
+.admin_btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  border-color: #555;
+}
+
+.admin_btn:disabled:hover {
+  background-color: transparent;
+  color: var(--text);
+  box-shadow: none;
+}
+
+.admin_btn-primary {
+  background-color: var(--accent);
+  color: var(--background);
+}
+
+.admin_btn-primary:hover {
+  background-color: var(--background);
+  color: var(--accent);
+}
+
+.admin_container input,
+.admin_container textarea,
+.admin_container select {
+  background-color: var(--secondary);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 0.75rem;
+  border-radius: 4px;
+  width: 100%;
+  margin-bottom: 1rem;
+  font-family: "Courier New", monospace;
+}
+
+.admin_container input:focus,
+.admin_container textarea:focus,
+.admin_container select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 10px var(--accent-glow);
+}
+
+.glitch {
+  position: relative;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
+}
+
+.glitch::before {
+  color: var(--accent);
+  z-index: -1;
+  animation: glitch-animation 0.3s infinite;
+}
+
+.glitch::after {
+  color: cyan;
+  z-index: -2;
+  animation: glitch-animation 0.3s infinite reverse;
+}
+
+@keyframes glitch-animation {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scrollbar styling */
+.admin_container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.admin_container::-webkit-scrollbar-track {
+  background: var(--secondary);
+}
+
+.admin_container::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 4px;
+}
+
+.admin_container::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-glow);
+}

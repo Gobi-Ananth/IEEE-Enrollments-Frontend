@@ -7,7 +7,7 @@ import { auth, provider, signInWithPopup } from "../config/firebase.js";
 const useUserStore = create((set) => ({
   user: null,
   loading: false,
-  checkingUserAuth: true,
+  checkingUserAuth: false,
 
   login: async () => {
     set({ loading: true });

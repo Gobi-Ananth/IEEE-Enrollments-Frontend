@@ -55,8 +55,16 @@ export default function Interview() {
           new Date(slot.time).toISOString().split("T")[0] === formattedDate
       );
 
-      setSlots(filteredSlots);
-      console.log(filteredSlots);
+      const uniqueSlotsMap = new Map();
+
+      filteredSlots.forEach((slot) => {
+        const slotTime = new Date(slot.time).toISOString();
+        if (!uniqueSlotsMap.has(slotTime)) {
+          uniqueSlotsMap.set(slotTime, slot);
+        }
+      });
+
+      setSlots([...uniqueSlotsMap.values()]);
     } catch (err) {
       toast.error("Error fetching slots:");
     }
@@ -64,12 +72,14 @@ export default function Interview() {
   };
 
   const handleDateChange = (selectedDate) => {
-    const formattedDate = selectedDate.toISOString().split("T")[0];
+    // const formattedDate = selectedDate.toISOString().split("T")[0];
+    const istDate = new Date(selectedDate.getTime() + 5.5 * 60 * 60 * 1000);
+    const formattedDate = istDate.toISOString().split("T")[0];
 
     if (availableDates.includes(formattedDate)) {
-      setDate(selectedDate);
+      setDate(istDate);
       setSelectedSlot(null);
-      fetchSlots(selectedDate);
+      fetchSlots(istDate);
     } else {
       setSlots([]);
       setSelectedSlot(null);
@@ -89,7 +99,9 @@ export default function Interview() {
     try {
       await axiosInstance.put(`/user/select-slot/${selectedSlot._id}`);
       toast.success("Slot booked successfully!");
-      await checkUserAuth();
+      setTimeout(() => {
+        checkUserAuth();
+      }, 1000);
       navigate("/meet", { state: { allowed: true } });
     } catch (err) {
       toast.error(err.response?.data?.message || "Something went wrong!");
@@ -105,8 +117,12 @@ export default function Interview() {
             onChange={handleDateChange}
             value={date}
             tileDisabled={({ date }) => {
-              const formattedDate = date.toISOString().split("T")[0];
-              return !availableDates.includes(formattedDate);
+              // const formattedDate = date.toISOString().split("T")[0];
+              // return !availableDates.includes(formattedDate);
+              const istDate = new Date(date.getTime() + 5.5 * 60 * 60 * 1000)
+                .toISOString()
+                .split("T")[0];
+              return !availableDates.includes(istDate);
             }}
           />
         </section>
@@ -120,7 +136,7 @@ export default function Interview() {
               {slots.map((slot, index) => (
                 <button
                   key={index}
-                  className={`slot-button ${
+                  className={`slot-button btn ${
                     selectedSlot === slot ? "selected" : ""
                   }`}
                   onClick={() => handleSlotSelection(slot)}

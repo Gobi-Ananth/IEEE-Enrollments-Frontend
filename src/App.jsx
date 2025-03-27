@@ -17,13 +17,22 @@ import SlotWindow from "./components/SlotWindow.jsx";
 import FallBack from "./components/FallBack.jsx";
 import LoadingScreen from "./components/LoadingScreen.jsx";
 import NotFoundScreen from "./components/NotFoundScreen.jsx";
+import AdminLogin from "./components/Admin-Components/AdminLogin.jsx";
+import useAdminStore from "./stores/useAdminStore.js";
+import InterviewAdmin from "./components/Admin-Components/InterviewAdmin.jsx";
 
 export default function App() {
   const { user, checkUserAuth, checkingUserAuth } = useUserStore();
+  const { admin, checkAdminAuth } = useAdminStore();
 
   useEffect(() => {
-    checkUserAuth();
-  }, [checkUserAuth]);
+    const path = window.location.pathname;
+    if (path.includes("/thedarkside")) {
+      checkAdminAuth();
+    } else {
+      checkUserAuth();
+    }
+  }, []);
 
   if (checkingUserAuth)
     return (
@@ -101,6 +110,16 @@ export default function App() {
               ) : (
                 <Navigate to="/login" />
               )
+            }
+          />
+          <Route
+            path="/thedarkside/login"
+            element={!admin ? <AdminLogin /> : <Navigate to="/thedarkside" />}
+          />
+          <Route
+            path="/thedarkside"
+            element={
+              admin ? <InterviewAdmin /> : <Navigate to="/thedarkside/login" />
             }
           />
           <Route

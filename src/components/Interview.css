@@ -1,3 +1,7 @@
+.container {
+  margin: 8px 0;
+}
+
 .Int-heading {
   font-size: 1.6rem;
   background-color: #00a8e8;
@@ -35,8 +39,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   border: solid black 4px;
+}
+
+.slots-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  overflow-y: scroll;
+  width: 100%;
 }
 
 .slots-container,
@@ -46,6 +59,26 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 5px;
+}
+
+.slot-button {
+  background-color: #fceee3;
+  padding: 10px 15px;
+  border: 2px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  font-weight: bold;
+}
+
+.slot-button:hover {
+  background-color: black;
+  color: white;
+}
+
+.slot-button.selected {
+  background-color: #24b577;
+  color: white;
 }
 
 .calendar-section .react-calendar {
@@ -64,7 +97,7 @@
   color: black;
 }
 
-.react-calendar__navigation__label__labelText,
+.react-calendar_navigationlabel_labelText,
 .submit-button {
   font-family: "Cooper Hewitt", sans-serif;
 }
@@ -76,14 +109,14 @@
   font-size: 18px;
 }
 
-.calendar-section .react-calendar__month-view__weekdays {
+.calendar-section .react-calendar_month-view_weekdays {
   text-transform: uppercase;
   font-weight: bold;
   font-size: 14px;
   text-align: center;
 }
 
-.calendar-section .react-calendar__month-view__weekdays__weekday {
+.calendar-section .react-calendar_month-viewweekdays_weekday {
   padding: 5px;
   color: black;
 }
@@ -119,4 +152,50 @@
   font-weight: 100;
   border-radius: 4px;
   background-color: #2ac080;
+}
+
+@media (max-width: 1080px) {
+  .Int-heading {
+    font-size: 1rem;
+    width: 14rem;
+  }
+
+  .booking-wrapper {
+    flex-direction: column;
+  }
+
+  .calendar-section,
+  .slots-section {
+    width: 18rem;
+    height: 20rem;
+    padding: 10px;
+  }
+
+  .submit-button {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 720px) {
+  .slot-button {
+    font-size: 0.7rem;
+    padding: 5px 8px;
+  }
+}
+
+.slots-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.slots-container::-webkit-scrollbar-track {
+  background: #ff9f17;
+}
+
+.slots-container::-webkit-scrollbar-thumb {
+  background: #f03f3f;
+  border-radius: 4px;
+}
+
+.slots-container::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-glow);
 }

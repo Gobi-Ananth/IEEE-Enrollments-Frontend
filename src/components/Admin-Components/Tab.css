@@ -1,0 +1,263 @@
+.admin_tabContent {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.admin_title {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  position: relative;
+  display: inline-block;
+}
+
+.admin_title::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, var(--accent), transparent);
+}
+
+.admin_interviewList {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.admin_interviewCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--secondary);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.admin_interviewCard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background-color: var(--accent);
+  opacity: 0.7;
+}
+
+.admin_interviewCard:hover {
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.glitchCard {
+  animation: cardGlitch 0.3s ease;
+}
+
+@keyframes cardGlitch {
+  0% {
+    transform: translate(0);
+  }
+
+  20% {
+    transform: translate(-5px, 5px);
+  }
+
+  40% {
+    transform: translate(-5px, -5px);
+  }
+
+  60% {
+    transform: translate(5px, 5px);
+  }
+
+  80% {
+    transform: translate(5px, -5px);
+  }
+
+  100% {
+    transform: translate(0);
+  }
+}
+
+.admin_interviewInfo {
+  flex: 1;
+}
+
+.admin_interviewInfo h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--text);
+}
+
+.admin_techStack {
+  font-size: 0.9rem;
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.admin_tech {
+  display: inline-block;
+  border: 1px solid rgba(181, 177, 177, 0.3);
+  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.admin_adminList {
+  margin-top: 1rem;
+}
+
+.admin_adminList h4,
+.admin_techStack h4 {
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  color: #999;
+}
+
+.admin_adminItem {
+  display: inline-block;
+  /* background-color: rgba(255, 0, 0, 0.1); */
+  color: white;
+  border: 1px solid rgba(181, 177, 177, 0.3);
+  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.admin_emptyState {
+  text-align: center;
+  padding: 3rem;
+  background-color: var(--secondary);
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+
+.admin_emptyState p {
+  color: #999;
+  font-size: 1.2rem;
+}
+
+.admin_warning {
+  background-color: rgba(255, 0, 0, 0.1);
+  border: 1px solid rgba(255, 0, 0, 0.3);
+  border-radius: 4px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.admin_warning p {
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+
+.admin_createForm,
+.admin_reviewForm {
+  background-color: var(--secondary);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2rem;
+}
+
+.admin_reviewForm {
+  margin-bottom: 60px;
+}
+
+.admin_formGroup {
+  margin-bottom: 1.5rem;
+}
+
+.admin_formGroup label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: var(--text);
+}
+
+.input,
+.textarea,
+.select {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #1a1a1a;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text);
+  font-family: "Courier New", monospace;
+  transition: all 0.3s ease;
+}
+
+.input:focus,
+.textarea:focus,
+.select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
+}
+
+.admin_hint {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 0.5rem;
+}
+
+.admin_createButton,
+.admin_submitButton,
+.admin_joinButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 150px;
+}
+
+.admin_buttonIcon {
+  margin-right: 0.5rem;
+  width: 16px;
+  height: 16px;
+}
+
+.admin_loading {
+  position: relative;
+  color: transparent !important;
+}
+
+.admin_loading::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: var(--text);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.admin_successMessage {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: rgba(0, 255, 0, 0.1);
+  border: 1px solid rgba(0, 255, 0, 0.3);
+  border-radius: 4px;
+  text-align: center;
+}
+
+.admin_successMessage p {
+  color: #00ff00;
+  text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+}
