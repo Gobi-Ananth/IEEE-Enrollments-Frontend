@@ -50,7 +50,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: 1rem;
+  gap: 0.3rem;
 }
 
 .repo-input {
@@ -89,4 +89,32 @@
     padding: 0.8rem;
     border-width: 3px;
   }
+
+  .task-deadline {
+    font-size: 0.6rem;
+  }
 }
+
+.task-deadline {
+  font-size: 16px;
+  color: #f03f3f;
+  padding: 4px 6px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+/* Responsive Styling
+@media (max-width: 768px) {
+  .task-deadline {
+    font-size: 14px;
+    padding: 10px 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .task-deadline {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+} */

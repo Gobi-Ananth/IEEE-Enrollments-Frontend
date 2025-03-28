@@ -19,26 +19,40 @@ export default function SlotWindow() {
     date: istDateTime.format("D MMMM YYYY"),
     time: istDateTime.format("HH:mm"),
   });
-  const [currentTime, setCurrentTime] = useState(new Date());
+  // const [currentTime, setCurrentTime] = useState(new Date());
   const [status, setStatus] = useState("waiting");
+  const [serverTime, setServerTime] = useState(null);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTime(new Date());
-    }, 1000);
+    const fetchServerTime = async () => {
+      try {
+        const response = await axiosInstance.get("/server-time");
+        setServerTime(new Date(response.data.serverTime));
+      } catch (err) {
+        toast.error("Failed to sync with server time.");
+      }
+    };
+
+    fetchServerTime();
+
+    // Refresh server time every 30 seconds
+    const interval = setInterval(fetchServerTime, 15000);
 
     return () => clearInterval(interval);
   }, []);
 
+  // Compare slot time with server time
   useEffect(() => {
-    const formattedTime = currentTime.toLocaleTimeString("en-GB", {
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-    if (status !== "confirmed" && formattedTime >= slot.time) {
-      setStatus("ready");
+    if (serverTime) {
+      const serverFormattedTime = moment(serverTime)
+        .tz("Asia/Kolkata")
+        .format("HH:mm");
+
+      if (status !== "confirmed" && serverFormattedTime >= slot.time) {
+        setStatus("ready");
+      }
     }
-  }, [currentTime, slot.time, status]);
+  }, [serverTime, slot.time, status]);
 
   if (!location.state?.allowed || !user.slot) {
     return <Navigate to="/" />;
@@ -92,7 +106,7 @@ export default function SlotWindow() {
           </button>
         )}
         {user.slot.isReady && !user.slot.meetLink && (
-          <p>Please wait a moment! Your link will be sent shortly.</p>
+          <p>Link will be sent via mail shortly.</p>
         )}
         {user.slot.isReady && user.slot.meetLink && (
           <a

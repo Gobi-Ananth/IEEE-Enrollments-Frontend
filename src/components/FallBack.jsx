@@ -5,6 +5,7 @@ const TextColor = [
   { label: "Completed", Color: "#2AC080" },
   { label: "Upcoming", Color: "#FD5F1C" },
   { label: "Missed", Color: "#F03F3F" },
+  { label: "Time's Up!", Color: "#F03F3F" },
 ];
 
 const FallBackContainer = styled.section`

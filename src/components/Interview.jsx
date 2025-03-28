@@ -90,19 +90,35 @@ export default function Interview() {
     setSelectedSlot(slot);
   };
 
+  const fetchServerTime = async () => {
+    try {
+      const response = await axiosInstance.get("/api/server-time");
+      const serverTime = new Date(response.data.serverTime);
+      return serverTime;
+    } catch (err) {
+      console.error("Failed to fetch server time:", err);
+      return new Date();
+    }
+  };
+
   const handleSubmit = async () => {
     if (!selectedSlot) {
       toast.error("Please select a time slot!");
       return;
     }
 
+    const serverTime = await fetchServerTime(); // Get server time
+    const slotTimeUTC = new Date(selectedSlot.time).toISOString();
+
     try {
-      await axiosInstance.put(`/user/select-slot/${selectedSlot._id}`);
-      toast.success("Slot booked successfully!");
-      setTimeout(() => {
-        checkUserAuth();
-      }, 1000);
-      navigate("/meet", { state: { allowed: true } });
+      if (new Date(slotTimeUTC) > serverTime) {
+        await axiosInstance.put(`/user/select-slot/${selectedSlot._id}`);
+        toast.success("Slot booked successfully!");
+        setTimeout(() => {
+          checkUserAuth();
+        }, 1000);
+        navigate("/meet", { state: { allowed: true } });
+      }
     } catch (err) {
       toast.error(err.response?.data?.message || "Something went wrong!");
     }

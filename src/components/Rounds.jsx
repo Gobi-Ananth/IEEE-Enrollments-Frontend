@@ -76,6 +76,13 @@ export default function Rounds() {
       return;
     }
 
+    if (index === 2 && user.isRound2Missed) {
+      navigate("/fallback", {
+        state: { allowed: true, fallbackText: "Time's Up!" },
+      });
+      return;
+    }
+
     if (currentRound === index && liveRound === index - 1) {
       navigate(index === 2 ? "/task" : "/fallback", {
         state: { allowed: true, fallbackText: "Upcoming" },
@@ -96,6 +103,20 @@ export default function Rounds() {
         return;
       }
       if (user.slot && index !== 0) {
+        if (user.currentRound === 1 && user.isRound1Missed) {
+          navigate("/fallback", {
+            state: { allowed: true, fallbackText: "Missed" },
+          });
+          return;
+        }
+
+        if (user.currentRound === 3 && user.isRound3Missed) {
+          navigate("/fallback", {
+            state: { allowed: true, fallbackText: "Missed" },
+          });
+          return;
+        }
+
         navigate("/meet", { state: { allowed: true } });
         return;
       }
