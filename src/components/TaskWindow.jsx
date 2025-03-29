@@ -31,7 +31,7 @@ export default function TaskWindow() {
           taskLink: repoLink,
         });
         toast.success(response.data.message);
-        await checkUserAuth();
+        checkUserAuth();
         setDisabled(false);
         navigate("/");
       }
@@ -64,7 +64,7 @@ export default function TaskWindow() {
         />
         <div className="task-deadline">Task Deadline: {deadlineIST}</div>
         <div className="submit-button-container">
-          <button type="submit" className="submit-button2" disabled>
+          <button type="submit" className="submit-button2" disabled={disabled}>
             Submit
           </button>
         </div>

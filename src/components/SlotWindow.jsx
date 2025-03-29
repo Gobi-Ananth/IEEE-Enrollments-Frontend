@@ -12,47 +12,57 @@ export default function SlotWindow() {
   const { user, checkUserAuth } = useUserStore();
   const location = useLocation();
 
-  const istDateTime = moment(user.slot?.dateTime || new Date()).tz(
-    "Asia/Kolkata"
-  );
-  const [slot] = useState({
-    date: istDateTime.format("D MMMM YYYY"),
-    time: istDateTime.format("HH:mm"),
-  });
-  // const [currentTime, setCurrentTime] = useState(new Date());
+  const [currentTime, setCurrentTime] = useState(moment().tz("Asia/Kolkata"));
   const [status, setStatus] = useState("waiting");
-  const [serverTime, setServerTime] = useState(null);
+  const [slot, setSlot] = useState({
+    date: "",
+    time: "",
+  });
 
   useEffect(() => {
     const fetchServerTime = async () => {
       try {
         const response = await axiosInstance.get("/server-time");
-        setServerTime(new Date(response.data.serverTime));
+        const serverTime = moment(response.data.time).tz("Asia/Kolkata");
+        setCurrentTime(serverTime);
       } catch (err) {
-        toast.error("Failed to sync with server time.");
+        console.error("Failed to fetch server time");
       }
     };
 
     fetchServerTime();
-
-    // Refresh server time every 30 seconds
-    const interval = setInterval(fetchServerTime, 15000);
+    const interval = setInterval(fetchServerTime, 10000);
 
     return () => clearInterval(interval);
   }, []);
 
-  // Compare slot time with server time
   useEffect(() => {
-    if (serverTime) {
-      const serverFormattedTime = moment(serverTime)
-        .tz("Asia/Kolkata")
-        .format("HH:mm");
-
-      if (status !== "confirmed" && serverFormattedTime >= slot.time) {
-        setStatus("ready");
-      }
+    if (!user.slot?.dateTime) {
+      checkUserAuth();
+      const istDateTime = moment(user.slot.dateTime).tz("Asia/Kolkata");
+      setSlot({
+        date: istDateTime.format("D MMMM YYYY"),
+        time: istDateTime.format("HH:mm"),
+      });
+    } else {
+      const istDateTime = moment(user.slot.dateTime).tz("Asia/Kolkata");
+      setSlot({
+        date: istDateTime.format("D MMMM YYYY"),
+        time: istDateTime.format("HH:mm"),
+      });
     }
-  }, [serverTime, slot.time, status]);
+  }, [user.slot, checkUserAuth]);
+
+  useEffect(() => {
+    const slotDateTime = moment(
+      `${slot.date} ${slot.time}`,
+      "D MMMM YYYY HH:mm"
+    ).tz("Asia/Kolkata");
+
+    if (status !== "confirmed" && currentTime.isSameOrAfter(slotDateTime)) {
+      setStatus("ready");
+    }
+  }, [currentTime, slot.date, slot.time, status]);
 
   if (!location.state?.allowed || !user.slot) {
     return <Navigate to="/" />;
@@ -101,7 +111,7 @@ export default function SlotWindow() {
           </div>
         </div>
         {status === "ready" && !user.slot.isReady && (
-          <button className="ready-btn btn" onClick={handleReadyClick}>
+          <button className="ready-btn" onClick={handleReadyClick}>
             I&apos;M READY!
           </button>
         )}

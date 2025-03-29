@@ -107,17 +107,20 @@ export default function Interview() {
       return;
     }
 
-    const serverTime = await fetchServerTime(); // Get server time
+    const serverTime = await fetchServerTime();
     const slotTimeUTC = new Date(selectedSlot.time).toISOString();
 
     try {
       if (new Date(slotTimeUTC) > serverTime) {
         await axiosInstance.put(`/user/select-slot/${selectedSlot._id}`);
         toast.success("Slot booked successfully!");
-        setTimeout(() => {
-          checkUserAuth();
-        }, 1000);
+        // setTimeout(() => {
+        //   checkUserAuth();
+        // }, 1000);
+        checkUserAuth();
         navigate("/meet", { state: { allowed: true } });
+      } else {
+        toast.success("Slot not available");
       }
     } catch (err) {
       toast.error(err.response?.data?.message || "Something went wrong!");
